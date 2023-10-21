@@ -1,0 +1,22 @@
+#!/bin/bash
+# Program to automatically compile a given C source code
+# Check if a source file was provided as an argument
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <source_file.c>"
+    exit 1
+fi
+
+# Get the source file name from the command-line argument
+source_file="$1"
+
+# Check if the source file exists
+if [ ! -f "$source_file" ]; then
+    echo "Source file '$source_file' does not exist."
+    exit 1
+fi
+
+# Extract the base name of the source file (without the .c extension)
+file_name="${source_file%.c}"
+
+# Compile the source code and create an executable with the same name
+gcc "$source_file" -o "${file_name}.exe"
